@@ -130,7 +130,7 @@ def player_api_php():
         series_id = request.args.get('series_id')
         output = source_list[int(series_id[-1])].get_series_info(series_id)
     else:
-        output = {"user_info":{"username":ModelSetting.get('user'),"password":ModelSetting.get('pass'),"message":"","auth":1,"status":"Active","exp_date":"1632734599","is_trial":"0","active_cons":"1","created_at":"1585304571","max_connections":"10","allowed_output_formats":["m3u8"]},"server_info":{"url":SystemModelSetting.get('ddns'),"timezone":"UTC","timestamp_now":int(time.time()),"time_now":datetime.now().strftime('%Y-%m-%d %H:%M:%S'),"process":True}}
+        output = {"user_info":{"username":ModelSetting.get('user'),"password":ModelSetting.get('pass'),"message":"","auth":1,"status":"Active","exp_date":"1632734599","is_trial":"0","active_cons":"1","created_at":"1585304571","max_connections":"10","allowed_output_formats":["m3u8"]},"server_info":{"url":SystemModelSetting.get('ddns'),"port":"9909","https_port":"","server_protocol":"","rtmp_port":"","timezone":"UTC","timestamp_now":int(time.time()),"time_now":datetime.now().strftime('%Y-%m-%d %H:%M:%S'),"process":True}}
    
     return jsonify(output)
 
