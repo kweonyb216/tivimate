@@ -40,7 +40,7 @@ def get_php():
 def xmltv_php():
     logger.debug('>> xmltv.php : %s', request.args)
     root = ET.Element('tv')
-    root.set('generator-info-name', SystemModelSetting.get('192.168.0.3:9909'))
+    root.set('generator-info-name', SystemModelSetting.get('ddns'))
 
     for source in source_list:
         tmp = source.get_live_channel_list()
@@ -130,7 +130,7 @@ def player_api_php():
         series_id = request.args.get('series_id')
         output = source_list[int(series_id[-1])].get_series_info(series_id)
     else:
-        output = {"user_info":{"username":ModelSetting.get('user'),"password":ModelSetting.get('pass'),"message":"","auth":1,"status":"Active","exp_date":"1632734599","is_trial":"0","active_cons":"1","created_at":"1585304571","max_connections":"10","allowed_output_formats":["m3u8"]},"server_info":{"url":SystemModelSetting.get('192.168.0.3:9909'),"port":"","https_port":"","server_protocol":"http","rtmp_port":"","timezone":"UTC","timestamp_now":int(time.time()),"time_now":datetime.now().strftime('%Y-%m-%d %H:%M:%S'),"process":True}}
+        output = {"user_info":{"username":ModelSetting.get('user'),"password":ModelSetting.get('pass'),"message":"","auth":1,"status":"Active","exp_date":"1632734599","is_trial":"0","active_cons":"1","created_at":"1585304571","max_connections":"10","allowed_output_formats":["m3u8"]},"server_info":{"url":SystemModelSetting.get('ddns'),"timezone":"UTC","timestamp_now":int(time.time()),"time_now":datetime.now().strftime('%Y-%m-%d %H:%M:%S'),"process":True}}
    
     return jsonify(output)
 
@@ -234,7 +234,7 @@ class LogicXC(LogicModuleBase):
             arg['scheduler'] = str(scheduler.is_include(job_id))
             arg['is_running'] = str(scheduler.is_running(job_id))
             arg['scheduler_count'] = u'%s 회 실행' % P.scheduler_count
-            arg['tivimate_url'] = '{}/{}'.format(SystemModelSetting.get('192.168.0.3:9909'), P.package_name)
+            arg['tivimate_url'] = '{}/{}'.format(SystemModelSetting.get('ddns'), P.package_name)
             return render_template('{package_name}_{module_name}_{sub}.html'.format(package_name=P.package_name, module_name=self.name, sub=sub), arg=arg)
         return render_template('sample.html', title='%s - %s' % (P.package_name, sub))
 
